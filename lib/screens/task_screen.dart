@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todoey/components/add_task_modal.dart';
 import 'package:todoey/components/tasks_list/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -10,7 +11,12 @@ class TasksScreen extends StatelessWidget {
         elevation: 5.0,
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => AddTaskModal(),
+          );
+        },
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
