@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
 class AddTaskModal extends StatelessWidget {
+  final Function onAddTask;
+  final textController = TextEditingController();
+
+  String newTasks;
+
+  AddTaskModal({@required this.onAddTask});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +33,11 @@ class AddTaskModal extends StatelessWidget {
             ),
             TextField(
               autofocus: true,
+              controller: textController,
               textAlign: TextAlign.center,
+              onChanged: (String newVal) {
+                newTasks = newVal;
+              },
             ),
             FlatButton(
               child: Text(
@@ -37,7 +48,9 @@ class AddTaskModal extends StatelessWidget {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                print("asdf");
+//                onAddTask(textController.value.text);
+                onAddTask(newTasks);
+                textController.clear();
               },
             ),
           ],

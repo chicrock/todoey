@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/components/add_task_modal.dart';
 import 'package:todoey/components/tasks_list/tasks_list.dart';
+import 'package:todoey/models/task.dart';
 
-class TasksScreen extends StatelessWidget {
+class TasksScreen extends StatefulWidget {
+  @override
+  _TasksScreenState createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,7 +22,16 @@ class TasksScreen extends StatelessWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskModal(),
+            builder: (context) => AddTaskModal(
+              onAddTask: (String name) {
+                setState(() {
+                  tasks.add(Task(name: name));
+                });
+
+                // Close the bottom sheet
+                Navigator.pop(context);
+              },
+            ),
           );
         },
       ),
@@ -50,7 +67,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${tasks.length} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
@@ -67,7 +84,7 @@ class TasksScreen extends StatelessWidget {
                   top: Radius.circular(20.0),
                 ),
               ),
-              child: TasksList(),
+              child: TasksList(tasks: tasks),
             ),
           )
         ],
