@@ -5,8 +5,12 @@ typedef void TOnChange(bool val);
 
 class TaskTile extends StatelessWidget {
   final Task task;
+  final TOnChange onChanged;
 
-  TaskTile({@required this.task});
+  TaskTile({
+    @required this.task,
+    @required this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +24,7 @@ class TaskTile extends StatelessWidget {
       trailing: Checkbox(
         activeColor: Colors.lightBlueAccent,
         value: task.isDone,
-        onChanged: (bool isDone) {
-          task.toggleDone();
-        },
+        onChanged: onChanged,
       ),
     );
   }

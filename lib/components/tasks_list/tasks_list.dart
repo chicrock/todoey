@@ -16,13 +16,26 @@ class _TasksListState extends State<TasksList> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
-      children: tasks.map(
-        (task) {
-          return TaskTile(task: task);
-        },
-      ).toList(),
+//    return ListView(
+//      padding: EdgeInsets.symmetric(horizontal: 20.0),
+//      children: tasks.map(
+//        (task) {
+//          return TaskTile(task: task);
+//        },
+//      ).toList(),
+//    );
+    return ListView.builder(
+      itemCount: tasks.length,
+      itemBuilder: (context, index) {
+        return TaskTile(
+          task: tasks[index],
+          onChanged: (bool isChecked) {
+            setState(() {
+              tasks[index].setIsChecked(isChecked);
+            });
+          },
+        );
+      },
     );
   }
 }
