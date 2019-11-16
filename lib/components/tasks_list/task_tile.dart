@@ -1,29 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:todoey/components/tasks_list/task_checkbox.dart';
+import 'package:todoey/models/task.dart';
 
-class TaskTile extends StatefulWidget {
-  @override
-  _TaskTileState createState() => _TaskTileState();
-}
+typedef void TOnChange(bool val);
 
-class _TaskTileState extends State<TaskTile> {
-  bool isChecked = false;
+class TaskTile extends StatelessWidget {
+  final Task task;
+
+  TaskTile({@required this.task});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(
-        'This is a task',
+        task.name,
         style: TextStyle(
-          decoration: isChecked ? TextDecoration.lineThrough : null,
+          decoration: task.isDone ? TextDecoration.lineThrough : null,
         ),
       ),
-      trailing: TaskCheckbox(
-        isChecked: isChecked,
-        onChanged: (bool newValue) {
-          setState(() {
-            isChecked = newValue;
-          });
+      trailing: Checkbox(
+        activeColor: Colors.lightBlueAccent,
+        value: task.isDone,
+        onChanged: (bool isDone) {
+          task.toggleDone();
         },
       ),
     );
