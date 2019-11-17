@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/components/add_task_modal.dart';
 import 'package:todoey/components/tasks_list/tasks_list.dart';
-import 'package:todoey/models/task.dart';
 import 'package:todoey/stores/task_store.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -18,14 +17,7 @@ class TasksScreen extends StatelessWidget {
           onPressed: () {
             showModalBottomSheet(
               context: context,
-              builder: (context) => AddTaskModal(
-                onAddTask: (String name) {
-                  Provider.of<TaskStore>(context).tasks.add(Task(name: name));
-
-                  // Close the bottom sheet
-                  Navigator.pop(context);
-                },
-              ),
+              builder: (context) => AddTaskModal(),
             );
           },
         ),
