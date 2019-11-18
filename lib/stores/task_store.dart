@@ -25,4 +25,12 @@ class TaskStore extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  void removeTask(Task task) {
+//    int taskIndex = _tasks.indexOf(task);
+//    _tasks.removeAt(taskIndex);
+    _tasks.remove(task);
+
+    notifyListeners();
+  }
 }
