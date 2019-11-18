@@ -4,7 +4,7 @@ class Task {
 
   Task({this.name, this.isDone = false});
 
-  void setIsChecked(bool isChcked) {
-    isDone = isChcked;
+  void toggleDone() {
+    isDone = !isDone;
   }
 }

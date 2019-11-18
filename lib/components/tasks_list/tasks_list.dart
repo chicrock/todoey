@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoey/components/tasks_list/task_tile.dart';
+import 'package:todoey/models/task.dart';
 import 'package:todoey/stores/task_store.dart';
 
 class TasksList extends StatelessWidget {
@@ -18,13 +19,10 @@ class TasksList extends StatelessWidget {
       builder: (context, taskStore, child) => ListView.builder(
         itemCount: taskStore.taskCount,
         itemBuilder: (context, index) {
+          Task task = taskStore.tasks[index];
+
           return TaskTile(
-            task: taskStore.tasks[index],
-            onChanged: (bool isChecked) {
-              Provider.of<TaskStore>(context)
-                  .tasks[index]
-                  .setIsChecked(isChecked);
-            },
+            task: task,
           );
         },
       ),

@@ -19,4 +19,10 @@ class TaskStore extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  void toggleIsDone(Task task) {
+    task.toggleDone();
+
+    notifyListeners();
+  }
 }
